@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7.0
+
+    restart: always
+    ports:
+      - "6379:6379"
+  web:
+    build: .
+    container_name: web
+    restart: on-failure
+
+    ports:
+      - "8000:8000"
+    depends_on:
+      - "redis"
+      
